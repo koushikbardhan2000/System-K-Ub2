@@ -92,6 +92,28 @@ sudo systemctl restart httpd
 
 ---
 
+## Install, Enable, and Configure nginx
+### To Install Enable and Start 
+```bash
+sudo apt install nginx -y
+sudo systemctl enable nginx
+sudo systemctl start nginx
+```
+### To check status
+```bash
+sudo systemctl status nginx
+```
+### To configure
+```bash
+sudo nano /etc/nginx/sites-available/compbiosysnbu.in/default
+```
+##(Optional) Setup SSL (HTTPS) with Let's Encrypt
+```bash
+sudo apt install certbot python3-certbot-nginx -y
+sudo certbot --nginx
+```
+---
+
 ## Install PHP
 ```bash
 sudo yum remove php*
