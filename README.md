@@ -265,6 +265,30 @@ screen -R exp
 ```
 
 ---
+## Install MySQL and phpmyadmin and setup
+### Install MySQL Server
+```bash
+sudo apt install mysql-server -y
+sudo mysql
+```
+
+```sql
+ALTER USER 'root'@'localhost' IDENTIFIED BY '326500';
+# or
+CREATE USER 'ksk'@'localhost' IDENTIFIED BY '326500';
+GRANT ALL PRIVILEGES ON *.* TO 'ksk'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+quit;
+```
+### Install phpMyAdmin
+```bash
+sudo apt install phpmyadmin -y
+```
+### Make a Symbolic link to phpmyadmin
+```bash
+sudo ln -s /usr/share/phpmyadmin /var/www/html
+```
+---
 
 ## Temporary: Add Location for EGRNi Webtool in nginx config
 ```bash
@@ -285,6 +309,14 @@ location ~ ^/EGRNi/.+\.php$ {
     fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     include fastcgi_params;
 }
+```
+
+---
+
+## Title
+### Sub
+```bash
+
 ```
 
 ---
