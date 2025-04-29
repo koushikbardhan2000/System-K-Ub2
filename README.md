@@ -188,7 +188,7 @@ gmx mdrun -v -s md_100ns.tpr -cpi md_100ns.cpt -deffnm md_100ns -append
 
 ---
 
-## Change Ownership of Directories
+## Change Ownership of Directories for nginx
 ```bash
 ls -l /var/www/DGEAR/
 id www-data
@@ -196,6 +196,14 @@ sudo chown -R www-data:www-data /var/www/DGEAR/
 sudo systemctl reload nginx
 sudo -u www-data /usr/bin/Rscript /var/www/DGEAR/RunCopy.R /var/www/DGEAR/uploads/Example_microarray_data.txt '1' '134' '135' '234' '0.05' '2'
 sudo cp /etc/nginx/sites-available/compbiosysnbu.in/default ~/Desktop/ksk/
+```
+
+---
+## Change Ownership of Directories
+### For DGEAR
+```bash
+sudo chown -R ksk:ksk /var/www/DGEAR/
+sudo chown -R www-data:www-data /var/www/DGEAR/
 ```
 
 ---
