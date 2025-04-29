@@ -14,10 +14,16 @@ exit
 ---
 
 ## Update and Upgrade System
+### Update list and upgreade
 ```bash
 sudo apt update -y
 apt list --upgradable
 sudo apt upgrade -y
+```
+
+### Altogether onetime
+```bash
+sudo apt update -y && apt upgrade -y
 ```
 
 ---
@@ -69,11 +75,15 @@ sudo R
 # > install.packages("BiocManager")
 # > BiocManager::install(c("DESeq2", "edgeR", "limma", "metapod"))
 # > install.packages("DGEAR")
-# > library(DESeq2)
-# > library(edgeR)
-# > library(limma)
-# > library(metapod)
-# > library(DGEAR)
+# > install.packages("ggplot2")
+# > install.packages("viridis")
+# > install.packages("ggrepel")
+# > install.packages("enrichR")
+# > BiocManager::install("STRINGdb")
+# > 
+# >
+# >
+
 ```
 
 ---
