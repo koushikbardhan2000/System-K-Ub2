@@ -331,6 +331,53 @@ location ~ ^/EGRNi/.+\.php$ {
 
 ---
 
+## Create Sub-domain 
+### Add A record as following
+![Add A record for sub-domain in hostinger](img/add-sub-domain.jpg)
+
+### In the hosting server do the rest
+```bash
+sudo mkdir -p /var/www/demo.compbiosysnbu.in
+# This will be the root folder you can also skip the .compbiosysnbu.in part
+sudo nano /var/www/demo.compbiosysnbu.in/index.html
+# <h1>Hurray!! sub-domain is running!!</h1>
+```
+Now moving on...
+```bash
+sudo nano /etc/nginx/sites-available/demo.compbiosysnbu.in
+```
+Place the following inside `demo.compbiosysnbu.in` and edit your php version accordingly then save the file. 
+```bash
+server {
+    listen 80;
+    server_name demo.compbiosysnbu.in;
+    root /var/www/demo.compbiosysnbu.in;
+    index index.html index.htm index.php;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php8.3-fpm.sock;
+    }
+
+}
+
+```
+Create the Symlink to enable site and restart the nginx 
+```bash
+sudo ln -s /etc/nginx/sites-available/demo.compbiosysnbu.in /etc/nginx/sites-enabled
+sudo nginx -t && sudo systemctl reload nginx
+
+```
+### Enable/Install SSL with Certbot
+```bash
+sudo certbot --nginx -d demo.compbiosysnbu.in
+```
+check https://demo.compbiosysnbu.in in your browser; it should reflect the message "Hurray!! sub-domain is running!!"
+---
+
 ## Title
 ### Sub
 ```bash
