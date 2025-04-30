@@ -378,6 +378,79 @@ sudo certbot --nginx -d demo.compbiosysnbu.in
 check https://demo.compbiosysnbu.in in your browser; it should reflect the message "Hurray!! sub-domain is running!!"
 ---
 
+
+### ✅ Subdomain Setup: `dgear.compbiosysnbu.in`
+
+#### ✅ 1. DNS Configuration
+
+You created an A record pointing the subdomain to your server IP:
+
+```
+dgear.compbiosysnbu.in → 45.123.110.211
+```
+
+---
+
+#### ✅ 2. Nginx Configuration
+
+You created a virtual host file at:
+
+```bash
+sudo nano /etc/nginx/sites-available/dgear.compbiosysnbu.in
+```
+
+With the following content:
+
+```nginx
+server {
+    listen 80;
+    server_name dgear.compbiosysnbu.in;
+    root /var/www/DGEAR;
+    index index.html index.htm index.php;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php8.3-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+}
+```
+---
+
+#### ✅ 3. Enable the Site and Reload Nginx
+
+```bash
+sudo ln -s /etc/nginx/sites-available/dgear.compbiosysnbu.in /etc/nginx/sites-enabled
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+---
+
+#### ✅ 4. SSL with Certbot
+
+Run the following to configure SSL:
+
+```bash
+sudo certbot --nginx -d dgear.compbiosysnbu.in
+```
+
+This:
+
+- Configured HTTPS in your Nginx config.
+- Set up **auto-renewal** with Certbot.
+
+---
+
+#### ✅ Final Test
+
+- Visit [https://dgear.compbiosysnbu.in](https://dgear.compbiosysnbu.in)
+---
+
 ## Title
 ### Sub
 ```bash
