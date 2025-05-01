@@ -403,19 +403,22 @@ With the following content:
 
 ```nginx
 server {
-    listen 80;
     server_name dgear.compbiosysnbu.in;
     root /var/www/DGEAR;
     index index.html index.htm index.php;
+    client_max_body_size 100M;
+
 
     location / {
         try_files $uri $uri/ =404;
     }
-
     location ~ \.php$ {
         include snippets/fastcgi-php.conf;
         fastcgi_pass unix:/run/php/php8.3-fpm.sock;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_connect_timeout 600s;
+        fastcgi_send_timeout 600s;
+        fastcgi_read_timeout 600s;
         include fastcgi_params;
     }
 }
