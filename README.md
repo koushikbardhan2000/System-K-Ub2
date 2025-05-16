@@ -306,6 +306,19 @@ sudo apt install phpmyadmin -y
 ```bash
 sudo ln -s /usr/share/phpmyadmin /var/www/html
 ```
+### Allow ksk user from any IP
+```bash
+sudo mysql -u root -p
+```
+In MySQL
+```sql
+CREATE USER 'ksk'@'%' IDENTIFIED BY '326500';
+GRANT ALL PRIVILEGES ON *.* TO 'ksk'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+# to check
+SELECT user, host FROM mysql.user WHERE user = 'ksk';
+
+```
 ---
 
 ## Temporary: Add Location for EGRNi Webtool in nginx config
