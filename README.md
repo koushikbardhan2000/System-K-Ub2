@@ -4,10 +4,10 @@
 
 ## Add User and Groups
 ```bash
-sudo adduser dipayan
-sudo passwd dipayan
-sudo usermod -aG wheel dipayan
-su - dipayan
+sudo adduser ksk
+sudo passwd ksk
+sudo usermod -aG wheel ksk
+su - ksk
 exit
 ```
 
