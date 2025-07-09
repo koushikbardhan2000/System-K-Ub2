@@ -124,6 +124,15 @@ Git LFS is used to manage large files by storing them outside the main Git repos
   git lfs track "*.csv"
   git lfs track "*.RData"
 
+  # Install if needed
+  pip install git-filter-repo
+
+  # Remove large files
+  git filter-repo --path final_annotated_data.csv --invert-paths
+  git filter-repo --path final_annotated_data_unique.csv --invert-paths
+  git filter-repo --path final_merged_data.csv --invert-paths
+  git filter-repo --path output/final_annotated_data_unique.csv --invert-paths
+  
   # Stage and commit all changes
   git add .
   git commit -m "Track large files with Git LFS"
