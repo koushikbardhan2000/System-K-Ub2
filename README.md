@@ -467,6 +467,28 @@ This:
 - Visit [https://dgear.compbiosysnbu.in](https://dgear.compbiosysnbu.in)
 ---
 
+
+## 🚀 Password-less SSH Setup using Public-Private Key Pair
+
+Follow these steps to enable password-less SSH login from your local machine to a remote server.
+
+### 1. Generate SSH Key Pair (on local machine VS-code)
+Leave everything blank and press enter to continue 
+```bash
+ssh-keygen -t rsa -b 4096 -C "koushikbardhan2000@gmail.com"
+```
+### 2. Copy Public Key to Remote Server (on local machine VS-code)
+```bash
+ssh-copy-id ksk@45.123.110.211
+```
+If "ssh-copy-id" is not available then use: (on local machine VS-code)
+```bash
+cat ~/.ssh/id_rsa.pub | ssh ksk@45.123.110.211 "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys"
+```
+---
+
+
+
 ## Title
 ### Sub
 ```bash
