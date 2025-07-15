@@ -164,3 +164,17 @@ git push -f origin main
 ```
 
 > **Note:** Tracked files are stored outside the main Git repo to avoid GitHub's file size limits.
+---
+
+# Installation of Python packages from github-repo
+### Clone the repo
+```bash
+git clone https://github.com/Blealtan/efficient-kan.git
+```
+
+### get inside the repo directiory and install (do not ignore the ".")
+```bash
+cd efficient-kan/
+pip install -e .
+```
+---
