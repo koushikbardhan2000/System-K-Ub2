@@ -177,4 +177,20 @@ git clone https://github.com/Blealtan/efficient-kan.git
 cd efficient-kan/
 pip install -e .
 ```
+
+### if setup.py is not available and showing
+ERROR: file:///home/ksk/Desktop/ksk/BoolODE does not appear to be a Python project: neither 'setup.py' nor 'pyproject.toml' found.
+run this and then run "pip install -e ."
+```bash
+cat <<EOF > setup.py
+from setuptools import setup, find_packages
+
+setup(
+    name='BoolODE',
+    version='0.1',
+    packages=find_packages(),
+    install_requires=[],
+)
+EOF
+```
 ---
