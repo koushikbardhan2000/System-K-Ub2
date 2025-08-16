@@ -487,6 +487,107 @@ cat ~/.ssh/id_rsa.pub | ssh ksk@45.123.110.211 "mkdir -p ~/.ssh && cat >> ~/.ssh
 ```
 ---
 
+# EGRNI Deployment Setup Guide
+
+## Working Directory
+```bash
+pwd
+/home/ksk/Desktop/ksk/EGRNI
+```
+
+## Step 1: Copy Project to `/var/www/`
+```bash
+cd
+sudo cp -rf /home/ksk/Desktop/ksk/EGRNI /var/www/
+```
+
+## Step 2: Bind Mount for Mirroring
+```bash
+sudo mount --bind /home/ksk/Desktop/ksk/EGRNI /var/www/EGRNI
+```
+
+Make the bind mount permanent:
+
+```bash
+sudo nano /etc/fstab
+```
+
+Add this line:
+```
+# mirror EGRNI directories (This done by user ksk) check readme.txt compbiosysnbu bind section
+/home/ksk/Desktop/ksk/EGRNI /var/www/EGRNI none bind 0 0
+```
+
+Apply changes:
+```bash
+sudo mount -a
+```
+
+## Step 3: Nginx Configuration for Main Domain
+Edit the configuration:
+```bash
+sudo nano /etc/nginx/sites-available/compbiosysnbu.in/default
+```
+
+Add:
+```nginx
+## location for .. /EGRNI configuration addition
+location /EGRNI/ {
+    root /var/www/;
+    index index.php index.html;
+    try_files $uri $uri/ /EGRNI/index.php?$args;
+}
+
+location ~ ^/EGRNI/.+\.php$ {
+    root /var/www/;
+    include snippets/fastcgi-php.conf;
+    fastcgi_pass unix:/run/php/php8.3-fpm.sock;
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    include fastcgi_params;
+}
+```
+
+## Step 4: Set Permissions
+```bash
+sudo chown -R www-data:www-data ~/Desktop/ksk/EGRNI/
+```
+
+## Step 5: Nginx Configuration for Subdomain
+```bash
+sudo nano /etc/nginx/sites-available/egrni.compbiosysnbu.in
+```
+
+Add:
+```nginx
+server {
+    server_name egrni.compbiosysnbu.in;
+    root /var/www/EGRNI;
+    index index.php index.htm index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php8.3-fpm.sock;
+    }
+}
+```
+
+## Step 6: SSL Certificate with Certbot
+```bash
+sudo certbot --nginx -d egrni.compbiosysnbu.in
+```
+
+## Step 7: DNS Setup
+- Add an **A record** for the subdomain `egrni` pointing to your server IP in **Hostinger**.
+
+## Step 8: Access the Application
+Visit:
+```
+https://egrni.compbiosysnbu.in/
+```
 
 
 ## Title
