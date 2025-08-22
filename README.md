@@ -87,6 +87,19 @@ sudo R
 ```
 
 ---
+## Install R library system-wide
+Starts a full root login shell, so $HOME becomes /root.
+```bash
+sudo -i R
+```
+R uses the system-wide defaults for library paths (like /usr/local/lib/R/site-library)
+```R
+install.packages("/home/ksk/Downloads/fdrtool_1.2.18.tar.gz", repos = NULL, type = "source",
+                 lib = "/usr/local/lib/R/site-library")
+```
+Type exit to exit to personal user 
+---
+
 
 ## Install, Enable, and Configure Apache (httpd)
 ```bash
