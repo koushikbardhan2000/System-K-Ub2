@@ -45,6 +45,7 @@ sudo nano /etc/apcupsd/apcupsd.conf
 Change the shutdown timer
 MINUTES → how long the system waits on battery before shutting down.
 MAXTIME → maximum time on battery (0 usually means disabled).
+BATTERYLEVEL → System shuts down when battery is low, preventing deep discharge.
 ```conf
 MINUTES 10
 MAXTIME 0
