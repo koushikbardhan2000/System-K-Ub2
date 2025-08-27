@@ -28,6 +28,30 @@ sudo apt update -y && apt upgrade -y
 
 ---
 
+## Online UPS setup
+### Use Apcaccess
+Installation
+```bash
+sudo apt install apcupsd
+```
+Check status
+```bash
+apcaccess status
+```
+Edit necessary
+```bash
+sudo nano /etc/apcupsd/apcupsd.conf
+```
+Change the shutdown timer
+MINUTES → how long the system waits on battery before shutting down.
+MAXTIME → maximum time on battery (0 usually means disabled).
+```conf
+MINUTES 10
+MAXTIME 0
+```
+
+---
+
 ## Add Cockpit
 ```bash
 sudo systemctl enable --now cockpit.socket
