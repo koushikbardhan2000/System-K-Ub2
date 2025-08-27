@@ -48,8 +48,12 @@ MAXTIME → maximum time on battery (0 usually means disabled).
 ```conf
 MINUTES 10
 MAXTIME 0
+BATTERYLEVEL 15
 ```
-
+Restart to Apply changes
+```bash
+sudo systemctl restart apcupsd
+```
 ---
 
 ## Add Cockpit
